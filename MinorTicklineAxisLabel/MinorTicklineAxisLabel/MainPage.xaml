@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Toolkit.Charts;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:local="clr-namespace:MinorTicklineAxisLabel"
+             x:Class="MinorTicklineAxisLabel.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:ViewModel/>
+    </ContentPage.BindingContext>
+
+    <Border Margin="10" StrokeShape="RoundRectangle 10" Stroke="Black" StrokeThickness="1">
+
+        <chart:SfCartesianChart x:Name="chart" Margin="20" PaletteBrushes="{Binding CustomBrushes}">
+
+            <chart:SfCartesianChart.Title>
+                <Label Text="Weather Report" HorizontalTextAlignment="Center" FontSize="20"/>
+            </chart:SfCartesianChart.Title>
+
+            <chart:SfCartesianChart.XAxes>
+                <chart:DateTimeAxis x:Name="XAxis" IntervalType="Months" Interval="1" MinorTicksPerInterval="1" ShowMajorGridLines="False" PlotOffsetStart="10" PlotOffsetEnd="10">
+                    <chart:DateTimeAxis.LabelStyle>
+                        <chart:ChartAxisLabelStyle LabelFormat="MMM/yy" TextColor="Black" FontAttributes="Bold"/>
+                    </chart:DateTimeAxis.LabelStyle>
+                    <chart:DateTimeAxis.MajorTickStyle>
+                        <chart:ChartAxisTickStyle TickSize="15" Stroke="Gray" StrokeWidth="1.5"/>
+                    </chart:DateTimeAxis.MajorTickStyle>
+                    <chart:DateTimeAxis.MinorTickStyle>
+                        <chart:ChartAxisTickStyle TickSize="8" Stroke="Black" StrokeWidth="1.2"/>
+                    </chart:DateTimeAxis.MinorTickStyle>
+                </chart:DateTimeAxis>
+            </chart:SfCartesianChart.XAxes>
+
+            <chart:SfCartesianChart.YAxes>
+                <chart:NumericalAxis x:Name="YAxis" Minimum="0" Maximum="120" Interval="40"/>
+            </chart:SfCartesianChart.YAxes>
+
+            <chart:SfCartesianChart.Legend>
+                <chart:ChartLegend/>
+            </chart:SfCartesianChart.Legend>
+
+            <chart:LineSeries ItemsSource="{Binding TemperatureData}"
+              XBindingPath="Date"
+              YBindingPath="Value"
+              Label="Temperature"
+                  ShowMarkers="True"/>
+
+            <chart:LineSeries ItemsSource="{Binding HumidityData}"
+              XBindingPath="Date"
+              YBindingPath="Value"
+              Label="Humidity"
+                  ShowMarkers="True"/>
+
+            <chart:LineSeries ItemsSource="{Binding RainfallData}"
+              XBindingPath="Date"
+              YBindingPath="Value"
+              Label="RainFall"
+                  ShowMarkers="True"/>
+
+        </chart:SfCartesianChart>
+
+    </Border>
+
+</ContentPage>
