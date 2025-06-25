@@ -1,73 +1,59 @@
-﻿using Microsoft.Maui.Controls.Shapes;
-using Syncfusion.Maui.Toolkit.Charts;
+﻿using Syncfusion.Maui.Toolkit.Charts;
 
 namespace MinorTicklineAxisLabel
 {
     public partial class MainPage : ContentPage
     {
+        private double offsetX = -0.43;
+        private double offsetY = 17;
+
         public MainPage()
         {
             InitializeComponent();
+            this.SizeChanged += MainPage_SizeChanged;
         }
 
-        protected override void OnAppearing()
+        private void MainPage_SizeChanged(object? sender, EventArgs e)
         {
-            base.OnAppearing();
-
             Dispatcher.Dispatch(async () =>
             {
                 await Task.Delay(300);
-                var labels = new[]
+                var labels = new Dictionary<double, string>();
+                foreach(var item in XAxis.VisibleLabels)
                 {
-                    new { Date = new DateTime(2023, 1, 15), Label = "16" },
-                    new { Date = new DateTime(2023, 2, 14), Label = "14" },
-                    new { Date = new DateTime(2023, 3, 15), Label = "16" },
-                    new { Date = new DateTime(2023, 4, 15), Label = "15" },
-                    new { Date = new DateTime(2023, 5, 15), Label = "16" },
-                    new { Date = new DateTime(2023, 6, 15), Label = "15" },
-                    new { Date = new DateTime(2023, 7, 15), Label = "16" },
-                    new { Date = new DateTime(2023, 8, 15), Label = "16" },
-                    new { Date = new DateTime(2023, 9, 15), Label = "15" },
-                    new { Date = new DateTime(2023, 10, 15), Label = "16" },
-                    new { Date = new DateTime(2023, 11, 15), Label = "15" },
-                };
-
-                double adjustDays = -2.5;
-
+                    string label = (Convert.ToDouble(item.Content) + 1).ToString();
+                    double midYear = Convert.ToDouble(item.Content) + 0.5;
+                    labels.Add(midYear, label);
+                }
+                
+                chart.Annotations.Clear();
                 foreach (var item in labels)
                 {
-                    var adjustedDate = item.Date.AddDays(adjustDays).ToOADate();
-                    AddDynamicAnnotation(adjustedDate, -67, item.Label);
-                    adjustDays += 11.7;
+                    AddDynamicAnnotation(item.Key + offsetX, chart.SeriesBounds.Height + offsetY, item.Value);
                 }
-
             });
         }
 
-        public void AddDynamicAnnotation(double xAxisValue, double yAxisValue, string labelText)
+        public void AddDynamicAnnotation(double xAxisValue, double yValue, string labelText)
         {
             // Convert axis values to screen points
             var x = chart.ValueToPoint(XAxis, xAxisValue);
-            var y = chart.ValueToPoint(YAxis, yAxisValue);
-
+            
             // Create the annotation
             var annotation = new TextAnnotation
             {
                 X1 = x,
-                Y1 = y,
+                Y1 = yValue,
                 Text = labelText,
                 CoordinateUnit = ChartCoordinateUnit.Pixel,
                 LabelStyle = new ChartAnnotationLabelStyle
                 {
-                    FontAttributes = FontAttributes.Italic,
-                    FontSize = 16,
+                    FontAttributes = FontAttributes.Bold,
+                    FontSize = 11,
+                    TextColor = Colors.Black
                 }
             };
-
-            // Add to chart annotations
             chart.Annotations.Add(annotation);
         }
-
     }
-
 }

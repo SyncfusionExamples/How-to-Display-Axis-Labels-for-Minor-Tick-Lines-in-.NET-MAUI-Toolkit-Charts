@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace MinorTicklineAxisLabel
 {
     public class Model
     {
-        public DateTime Date { get; set; }
+        public double Year { get; set; }
         public double Value { get; set; }
 
-        public Model(DateTime date, double value)
+        public Model(double year, double value)
         {
-            Date = date;
+            Year = year;
             Value = value;
         }
     }
