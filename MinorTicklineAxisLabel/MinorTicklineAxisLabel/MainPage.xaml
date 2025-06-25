@@ -19,15 +19,19 @@
 
             <chart:SfCartesianChart.XAxes>
                 <chart:NumericalAxis x:Name="XAxis" Minimum="2002" Interval="1" MinorTicksPerInterval="1" Maximum="2020" ShowMajorGridLines="False" PlotOffsetEnd="10" PlotOffsetStart="10">
+
                     <chart:NumericalAxis.LabelStyle>
                         <chart:ChartAxisLabelStyle TextColor="Black" FontAttributes="Italic" FontSize="14"/>
                     </chart:NumericalAxis.LabelStyle>
+
                     <chart:NumericalAxis.MajorTickStyle>
                         <chart:ChartAxisTickStyle TickSize="25" Stroke="Gray" StrokeWidth="1.5"/>
                     </chart:NumericalAxis.MajorTickStyle>
+
                     <chart:NumericalAxis.MinorTickStyle>
                         <chart:ChartAxisTickStyle TickSize="8" Stroke="Black" StrokeWidth="1.2"/>
                     </chart:NumericalAxis.MinorTickStyle>
+
                 </chart:NumericalAxis>
             </chart:SfCartesianChart.XAxes>
 
