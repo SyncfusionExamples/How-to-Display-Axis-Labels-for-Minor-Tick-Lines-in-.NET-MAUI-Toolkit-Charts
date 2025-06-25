@@ -4,7 +4,7 @@ namespace MinorTicklineAxisLabel
 {
     public partial class MainPage : ContentPage
     {
-        private double offsetX = -0.43;
+        private double offsetX = -0.45;
         private double offsetY = 17;
 
         public MainPage()
@@ -19,11 +19,11 @@ namespace MinorTicklineAxisLabel
             {
                 await Task.Delay(300);
                 var labels = new Dictionary<double, string>();
-                foreach(var item in XAxis.VisibleLabels)
+                var visiblelabels = XAxis.VisibleLabels;
+                for (int i = 1; i < visiblelabels.Count; i++)
                 {
-                    string label = (Convert.ToDouble(item.Content) + 1).ToString();
-                    double midYear = Convert.ToDouble(item.Content) + 0.5;
-                    labels.Add(midYear, label);
+                    double midYear = (Convert.ToDouble(visiblelabels[i - 1].Content) + Convert.ToDouble(visiblelabels[i].Content)) / 2;
+                    labels.Add(midYear, midYear.ToString());
                 }
                 
                 chart.Annotations.Clear();

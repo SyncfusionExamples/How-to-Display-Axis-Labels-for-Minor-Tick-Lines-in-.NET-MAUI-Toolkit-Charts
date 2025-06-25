@@ -18,7 +18,7 @@
             </chart:SfCartesianChart.Title>
 
             <chart:SfCartesianChart.XAxes>
-                <chart:NumericalAxis x:Name="XAxis" Minimum="2002" Interval="1" MinorTicksPerInterval="1" Maximum="2020" ShowMajorGridLines="False" PlotOffsetEnd="10" PlotOffsetStart="10">
+                <chart:NumericalAxis x:Name="XAxis" Minimum="2002" Interval="2" MinorTicksPerInterval="1" Maximum="2020" ShowMajorGridLines="False" PlotOffsetEnd="10" PlotOffsetStart="10">
 
                     <chart:NumericalAxis.LabelStyle>
                         <chart:ChartAxisLabelStyle TextColor="Black" FontAttributes="Italic" FontSize="14"/>
