@@ -6,120 +6,118 @@ The [SfCartesianChart](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Ma
 Learn step-by-step instructions and gain insights to display Axis Labels for Minor Tick Lines.
 
 ### Configure the Toolkit Cartesian Chart
-Define [SfCartesianChart](https://help.syncfusion.com/maui-toolkit/cartesian-charts/getting-started) with [DateTimeAxis](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.DateTimeAxis.html) for the X-axis and [NumericalAxis](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.NumericalAxis.html) for the Y-axis. Add a [LineSeries](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.LineSeries.html) to visualize data points.
-
+Define [SfCartesianChart](https://help.syncfusion.com/maui-toolkit/cartesian-charts/getting-started) with both X-axis and Y-axis set as [NumericalAxis](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.NumericalAxis.html) to represent numeric data. Add a [LineSeries](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.LineSeries.html) to visualize data points.
 
 #### XAML
 ```xml
   <chart:SfCartesianChart>
-  
-     <chart:SfCartesianChart.XAxes>
-         <chart:DateTimeAxis IntervalType="Months" Interval="1"/>
-     </chart:SfCartesianChart.XAxes>
-  
-     <chart:SfCartesianChart.YAxes>
-         <chart:NumericalAxis Minimum="0" Maximum="120" Interval="40"/>
-     </chart:SfCartesianChart.YAxes>
-  
-     ......
-  
-     <chart:LineSeries ItemsSource="{Binding TemperatureData}"
-                   XBindingPath="Date"
-                   YBindingPath="Value"
-                   ShowMarkers="True"/>
-  
-     <chart:LineSeries ItemsSource="{Binding HumidityData}"
-                   XBindingPath="Date"
-                   YBindingPath="Value"
-                   ShowMarkers="True"/>
-  
-     <chart:LineSeries ItemsSource="{Binding RainfallData}"
-                   XBindingPath="Date"
-                   YBindingPath="Value"
-                   ShowMarkers="True"/>
-  
-  </chart:SfCartesianChart>
+
+    <chart:SfCartesianChart.XAxes>
+        <chart:NumericalAxis Minimum="2002" Interval="1" Maximum="2020"/>
+    </chart:SfCartesianChart.XAxes>
+
+    <chart:SfCartesianChart.YAxes>
+        <chart:NumericalAxis Minimum="0" Maximum="120" Interval="20"/>
+    </chart:SfCartesianChart.YAxes>
+
+    ......
+
+    <chart:LineSeries ItemsSource="{Binding WheatCultivationData}"
+                      XBindingPath="Year"
+                      YBindingPath="Value"
+                      Label="Wheat"
+                      ShowMarkers="True"/>
+
+    <chart:LineSeries ItemsSource="{Binding RiceCultivationData}"
+                      XBindingPath="Year"
+                      YBindingPath="Value"
+                      Label="Rice"
+                      ShowMarkers="True"/>
+
+    <chart:LineSeries ItemsSource="{Binding MaizeCultivationData}"
+                      XBindingPath="Year"
+                      YBindingPath="Value"
+                      Label="Maize"
+                      ShowMarkers="True"/>
+
+  </chart:SfCartesianChart> 
 ```
 
 ### Display the Axis Labels for Minor Tick Lines
-Enable minor ticks by setting the [MinorTicksPerInterval](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.RangeAxisBase.html#Syncfusion_Maui_Toolkit_Charts_RangeAxisBase_MinorTicksPerInterval) property on the axis. Then, use code-behind logic to convert axis values into screen coordinates and add [TextAnnotation](https://help.syncfusion.com/maui-toolkit/cartesian-charts/annotation#text-annotation) with properties like [X1](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.ChartAnnotation.html#Syncfusion_Maui_Toolkit_Charts_ChartAnnotation_X1), [Y1](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.ChartAnnotation.html#Syncfusion_Maui_Toolkit_Charts_ChartAnnotation_Y1), [Text](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.TextAnnotation.html#Syncfusion_Maui_Toolkit_Charts_TextAnnotation_Text) and [LabelStyle](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.TextAnnotation.html#Syncfusion_Maui_Toolkit_Charts_TextAnnotation_LabelStyle), using [CoordinateUnit](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.ChartAnnotation.html#Syncfusion_Maui_Toolkit_Charts_ChartAnnotation_CoordinateUnit) to Pixel for accurate and customizable label placement.
+Enable minor ticks by setting the [MinorTicksPerInterval](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.RangeAxisBase.html#Syncfusion_Maui_Toolkit_Charts_RangeAxisBase_MinorTicksPerInterval) property on the axis to display additional tick marks between major intervals.This code uses code-behind logic to dynamically add [TextAnnotation](https://help.syncfusion.com/maui-toolkit/cartesian-charts/annotation#text-annotation) labels to a [SfCartesianChart](https://help.syncfusion.com/maui-toolkit/cartesian-charts/getting-started) by converting X-axis values to pixel coordinates with **ValueToPoint**. It calculates midpoints between visible labels and places annotations precisely using properties like [X1](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.ChartAnnotation.html#Syncfusion_Maui_Toolkit_Charts_ChartAnnotation_X1), [Y1](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.ChartAnnotation.html#Syncfusion_Maui_Toolkit_Charts_ChartAnnotation_Y1), [Text](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.TextAnnotation.html#Syncfusion_Maui_Toolkit_Charts_TextAnnotation_Text) and [LabelStyle](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.TextAnnotation.html#Syncfusion_Maui_Toolkit_Charts_TextAnnotation_LabelStyle) and [CoordinateUnit](https://help.syncfusion.com/cr/maui-toolkit/Syncfusion.Maui.Toolkit.Charts.ChartAnnotation.html#Syncfusion_Maui_Toolkit_Charts_ChartAnnotation_CoordinateUnit) to **Pixel**, applying offsetX and offsetY for fine-tuned alignment during the **SizeChanged** event.
 
 #### XAML
 ```xml
   <chart:SfCartesianChart>
-  
-     <chart:SfCartesianChart.XAxes>
-         <chart:DateTimeAxis IntervalType="Months" Interval="1" MinorTicksPerInterval="1"/>
-     </chart:SfCartesianChart.XAxes>
-  
-     ......
-  
-  </chart:SfCartesianChart>
+
+    <chart:SfCartesianChart.XAxes>
+        <chart:NumericalAxis MinorTicksPerInterval="1"/>
+    </chart:SfCartesianChart.XAxes>
+
+    ......
+
+</chart:SfCartesianChart> 
 ```
 
 #### C#
 ```csharp
-  protected override void OnAppearing()
-  {
-     base.OnAppearing();
-  
-     Dispatcher.Dispatch(async () =>
-     {
-         await Task.Delay(300);
-         var labels = new[]
-         {
-             new { Date = new DateTime(2023, 1, 15), Label = "16" },
-             new { Date = new DateTime(2023, 2, 14), Label = "14" },
-             new { Date = new DateTime(2023, 3, 15), Label = "16" },
-             new { Date = new DateTime(2023, 4, 15), Label = "15" },
-             new { Date = new DateTime(2023, 5, 15), Label = "16" },
-             new { Date = new DateTime(2023, 6, 15), Label = "15" },
-             new { Date = new DateTime(2023, 7, 15), Label = "16" },
-             new { Date = new DateTime(2023, 8, 15), Label = "16" },
-             new { Date = new DateTime(2023, 9, 15), Label = "15" },
-             new { Date = new DateTime(2023, 10, 15), Label = "16" },
-             new { Date = new DateTime(2023, 11, 15), Label = "15" },
-         };
-  
-         double adjustDays = -2.5;
-  
-         foreach (var item in labels)
-         {
-             var adjustedDate = item.Date.AddDays(adjustDays).ToOADate();
-             AddDynamicAnnotation(adjustedDate, -67, item.Label);
-             adjustDays += 11.7;
-         }
-  
-     });
-  }
-  
-  public void AddDynamicAnnotation(double xAxisValue, double yAxisValue, string labelText)
-  {
-     // Convert axis values to screen points
-     var x = chart.ValueToPoint(XAxis, xAxisValue);
-     var y = chart.ValueToPoint(YAxis, yAxisValue);
-  
-     // Create the annotation
-     var annotation = new TextAnnotation
-     {
-         X1 = x,
-         Y1 = y,
-         Text = labelText,
-         CoordinateUnit = ChartCoordinateUnit.Pixel,
-         LabelStyle = new ChartAnnotationLabelStyle
-         {
-             FontAttributes = FontAttributes.Italic,
-             FontSize = 16,
-         }
-     };
-  
-     // Add to chart annotations
-     chart.Annotations.Add(annotation);
-  }
+public partial class MainPage : ContentPage
+{
+    private double offsetX = -0.43;
+    private double offsetY = 17;
+    public MainPage()
+    {
+        InitializeComponent();
+        this.SizeChanged += MainPage_SizeChanged;
+    }
+
+    private void MainPage_SizeChanged(object? sender, EventArgs e)
+    {
+        Dispatcher.Dispatch(async () =>
+        {
+            await Task.Delay(300);
+            var labels = new Dictionary<double, string>();
+            foreach(var item in XAxis.VisibleLabels)
+            {
+                string label = (Convert.ToDouble(item.Content) + 1).ToString();
+                double midYear = Convert.ToDouble(item.Content) + 0.5;
+                labels.Add(midYear, label);
+            }
+            
+            chart.Annotations.Clear();
+            foreach (var item in labels)
+            {
+                AddDynamicAnnotation(item.Key + offsetX, chart.SeriesBounds.Height + offsetY, item.Value);
+            }
+        });
+    }
+
+    public void AddDynamicAnnotation(double xAxisValue, double yValue, string labelText)
+    {
+        // Convert axis values to screen points
+        var x = chart.ValueToPoint(XAxis, xAxisValue);
+        
+        // Create the annotation
+        var annotation = new TextAnnotation
+        {
+            X1 = x,
+            Y1 = yValue,
+            Text = labelText,
+            CoordinateUnit = ChartCoordinateUnit.Pixel,
+            LabelStyle = new ChartAnnotationLabelStyle
+            {
+                FontAttributes = FontAttributes.Bold,
+                FontSize = 11,
+                TextColor = Colors.Black
+            }
+        };
+        chart.Annotations.Add(annotation);
+    }
+}
 ```
 ### Output:
 
-![MinorTicklineAxisLabelOutput](https://github.com/user-attachments/assets/2dd54a9c-b149-4529-a6e9-4e3e98588a13)
+![MinorTicklineAxisLabel](https://github.com/user-attachments/assets/060dc482-b672-4e94-a6a8-d4452654769e)
 
 ### Troubleshooting
 
