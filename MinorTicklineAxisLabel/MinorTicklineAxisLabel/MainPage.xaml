@@ -14,7 +14,7 @@
         <chart:SfCartesianChart x:Name="chart" Margin="20" PaletteBrushes="{Binding CustomBrushes}">
 
             <chart:SfCartesianChart.Title>
-                <Label Text="Weather Report" HorizontalTextAlignment="Center" FontSize="20"/>
+                <Label Text="Agriculture Yield Report" HorizontalTextAlignment="Center" FontSize="20"/>
             </chart:SfCartesianChart.Title>
 
             <chart:SfCartesianChart.XAxes>
