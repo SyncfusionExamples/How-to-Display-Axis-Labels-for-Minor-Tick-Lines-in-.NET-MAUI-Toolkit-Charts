@@ -118,7 +118,7 @@ public partial class MainPage : ContentPage
 ```
 ### Output:
 
-![MinorTicklineAxisLabelOutput](https://github.com/user-attachments/assets/5a8c6677-dcd2-469e-ae50-4dc3034f06f9)
+![MinorTicklineAxisLabel](https://github.com/user-attachments/assets/e0faf8ad-5135-48c1-b0b2-d9f70841b140)
 
 ### Troubleshooting
 
