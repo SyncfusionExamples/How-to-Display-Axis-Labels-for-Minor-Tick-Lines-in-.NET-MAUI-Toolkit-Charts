@@ -126,4 +126,4 @@ public partial class MainPage : ContentPage
 
 If you are facing a path too long exception when building this example project, close Visual Studio and rename the repository to a shorter name before building the project.
 
-For more details, refer to the KB on [how to display axis labels for minor ticklines in .NET MAUI Toolkit Charts]().
+For more details, refer to the KB on [how to display axis labels for minor ticklines in .NET MAUI Toolkit Charts](https://support.syncfusion.com/kb/article/19979/how-to-display-axis-labels-for-minor-tick-lines-in-net-maui-toolkit-charts).
